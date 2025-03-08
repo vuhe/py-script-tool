@@ -6,11 +6,11 @@ authors = ["vuhe <zhuhe202@qq.com>"]
 readme = "README.md"
 packages = [
     { include = "book_walker_tw" },
-    { include = "check_ppact" },
+    { include = "check_ppcat" },
     { include = "crop_white_border" },
     { include = "fix_cbz_image" },
     { include = "manga_chap_add" },
-    { include = "mkv_ass_subset" },
+    { include = "ass_subset" },
     { include = "tool_helper" }
 ]
 
@@ -20,7 +20,7 @@ check-ppcat = "check_ppcat.main:main"
 crop-white-border = "crop_white_border.main:main"
 fix-cbz-image = "fix_cbz_image.main:main"
 manga-chap-add = "manga_chap_add.main:main"
-ass-subset = "mkv_ass_subset.main:main"
+ass-subset = "ass_subset.main:main"
 
 [tool.poetry.dependencies]
 python = "^3.12"

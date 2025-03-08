@@ -1,16 +1,17 @@
 [tool.poetry]
 name = "py-script-tool"
 version = "0.1.0"
-description = ""
+description = "macOS 终端脚本合集（个人使用）"
 authors = ["vuhe <zhuhe202@qq.com>"]
 readme = "README.md"
 
 [tool.poetry.scripts]
 book-walker-tw = "book_walker_tw.main:main"
 check-ppcat = "check_ppcat.main:main"
+crop-white-border = "crop_white_border.main:main"
 fix-cbz-image = "fix_cbz_image.main:main"
 manga-chap-add = "manga_chap_add.main:main"
-mkv-ass-subset = "mkv_ass_subset.main:main"
+ass-subset = "mkv_ass_subset.main:main"
 
 [tool.poetry.dependencies]
 python = "^3.12"

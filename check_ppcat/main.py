@@ -4,8 +4,8 @@ import os
 import re
 
 from PIL import Image
-from rich.progress import track
 from rich.console import Console
+from rich.progress import track
 
 from tool_helper.console import for_print_path
 
@@ -59,9 +59,9 @@ def check_image_for_error(cwd, image_path):
 
 def main():
     try:
-        for root, _, files in track(os.walk(os.getcwd()), description="[blue]Check folder"):
+        for root, _, files in os.walk(os.getcwd()):
             check_ppcat_folder(os.getcwd(), root)
-            for file in track(files, description="[yellow]Check img", transient=True):
+            for file in track(files, description="[blue]Check Img", transient=True):
                 if file.lower().endswith(('.png', '.jpg', '.jpeg')):
                     check_image_for_error(os.getcwd(), os.path.join(root, file))
     except KeyboardInterrupt:

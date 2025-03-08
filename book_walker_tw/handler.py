@@ -67,8 +67,6 @@ def download_book(driver: webdriver.Chrome, cfg: Config):
     overwrite = cfg.overwrite
     save_dir = Path(cfg.get_output_dir())
 
-    print(f"Downloading book {product_id}")
-
     driver.get(f"https://www.bookwalker.com.tw/browserViewer/{product_id}/read")
 
     WebDriverWait(driver, 10).until(

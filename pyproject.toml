@@ -6,6 +6,7 @@ authors = ["vuhe <zhuhe202@qq.com>"]
 readme = "README.md"
 
 [tool.poetry.scripts]
+book-walker-tw = "book_walker_tw.main:main"
 check-ppcat = "check_ppcat.main:main"
 fix-cbz-image = "fix_cbz_image.main:main"
 manga-chap-add = "manga_chap_add.main:main"
@@ -13,6 +14,7 @@ mkv-ass-subset = "mkv_ass_subset.main:main"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+numpy = "^2.2.3"      # 运算库
 rich = "^13.9.4"      # 彩色终端
 pillow = "^11.1.0"    # 图片库
 otf2ttf = "^0.2"      # 字体文件转换

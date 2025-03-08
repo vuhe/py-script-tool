@@ -4,6 +4,15 @@ version = "0.1.0"
 description = "macOS 终端脚本合集（个人使用）"
 authors = ["vuhe <zhuhe202@qq.com>"]
 readme = "README.md"
+packages = [
+    { include = "book_walker_tw" },
+    { include = "check_ppact" },
+    { include = "crop_white_border" },
+    { include = "fix_cbz_image" },
+    { include = "manga_chap_add" },
+    { include = "mkv_ass_subset" },
+    { include = "tool_helper" }
+]
 
 [tool.poetry.scripts]
 book-walker-tw = "book_walker_tw.main:main"

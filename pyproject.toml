@@ -7,6 +7,7 @@ readme = "README.md"
 
 [tool.poetry.scripts]
 check-ppcat = "check_ppcat.main:main"
+fix-cbz-image = "fix_cbz_image.main:main"
 manga-chap-add = "manga_chap_add.main:main"
 mkv-ass-subset = "mkv_ass_subset.main:main"
 

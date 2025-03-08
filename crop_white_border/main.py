@@ -95,21 +95,24 @@ def crop_images(input_folder, output_folder, mode):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="裁剪图片的白边")
-    _ = parser.parse_args()
+    try:
+        parser = argparse.ArgumentParser(description="裁剪图片的白边")
+        _ = parser.parse_args()
 
-    mode = inquirer.select(
-        message="裁剪方向:",
-        choices=[
-            Choice(value="horizontal", name="horizontal (左右)"),
-            Choice(value="vertical", name="vertical (上下)"),
-        ],
-        default="vertical",
-    ).execute()
+        mode = inquirer.select(
+            message="裁剪方向:",
+            choices=[
+                Choice(value="horizontal", name="horizontal (左右)"),
+                Choice(value="vertical", name="vertical (上下)"),
+            ],
+            default="vertical",
+        ).execute()
 
-    cwd = os.getcwd()  # 当前文件夹
-    output = os.path.join(cwd, "output")
-    crop_images(cwd, output, mode)
+        cwd = os.getcwd()  # 当前文件夹
+        output = os.path.join(cwd, "output")
+        crop_images(cwd, output, mode)
+    except KeyboardInterrupt:
+        print("Exiting……")
 
 
 if __name__ == "__main__":

@@ -5,7 +5,7 @@ from InquirerPy import prompt
 from rich.console import Console
 
 from ass_subset import ass_subset
-from .mkv_nix import print_tracks, extract_ass
+from mkv_ass_subset.mkv_nix import print_tracks, extract_ass
 
 console = Console()
 

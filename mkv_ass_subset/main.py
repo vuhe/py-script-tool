@@ -1,6 +1,6 @@
 import os
 
-from .mkv_ass import process_file
+from mkv_ass_subset.mkv_ass import process_file
 
 
 def main():

@@ -1,7 +1,7 @@
 import os
 from concurrent.futures import ThreadPoolExecutor
 
-from .cbz_handler import check_zip_file, process_zip_file
+from fix_cbz_image.cbz_handler import check_zip_file, process_zip_file
 
 
 def process_file(file_path):

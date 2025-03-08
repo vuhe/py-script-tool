@@ -61,7 +61,7 @@ def main():
     try:
         for root, _, files in os.walk(os.getcwd()):
             check_ppcat_folder(os.getcwd(), root)
-            for file in track(files, description="[blue]Check Img", transient=True):
+            for file in track(files, description="[blue]Check Img", transient=True, console=console):
                 if file.lower().endswith(('.png', '.jpg', '.jpeg')):
                     check_image_for_error(os.getcwd(), os.path.join(root, file))
     except KeyboardInterrupt:

@@ -5,6 +5,7 @@ import numpy as np
 from InquirerPy import inquirer
 from InquirerPy.base.control import Choice
 from PIL import Image
+from rich.progress import track
 
 
 def get_min_white_border(image_files, mode):
@@ -84,14 +85,14 @@ def crop_images(input_folder, output_folder, mode):
         ).execute()
         min_top_bottom = float(min_top_bottom)
 
-    for file in image_files:
+    for file in track(image_files, description="[blue]Cropping"):
         img = Image.open(file)
         width, height = img.size
         cropped = img.crop((min_left_right, min_top_bottom, width - min_left_right, height - min_top_bottom))
         output_path = os.path.join(output_folder, os.path.basename(file) + ".webp")
         cropped.save(output_path, "WEBP", quality=90)
 
-    print(f"所有图片已裁剪并保存到 {output_folder}")
+    print(f"所有图片已裁剪")
 
 
 def main():

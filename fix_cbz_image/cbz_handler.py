@@ -1,6 +1,7 @@
+import io
 import os
 import zipfile
-import io
+
 from PIL import Image
 
 from tool_helper.console import for_print_path

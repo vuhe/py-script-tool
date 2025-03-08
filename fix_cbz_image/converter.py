@@ -1,6 +1,7 @@
 import io
-from PIL import Image
 import subprocess
+
+from PIL import Image
 
 
 def check_lossless_jxl(jxl_data):

@@ -17,6 +17,9 @@ rich = "^13.9.4"      # 彩色终端
 pillow = "^11.1.0"    # 图片库
 otf2ttf = "^0.2"      # 字体文件转换
 inquirerpy = "^0.3.4" # 终端交互
+selenium = "^4.29.0"
+undetected-chromedriver = "^3.5.5"
+webdriver-manager = "^4.0.2"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

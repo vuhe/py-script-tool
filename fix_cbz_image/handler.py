@@ -3,6 +3,7 @@ import zipfile
 from concurrent.futures import ThreadPoolExecutor
 from queue import Queue
 
+from send2trash import send2trash
 from rich.progress import Progress
 
 from fix_cbz_image import console
@@ -168,7 +169,12 @@ def process_zip_file(zip_path, task: HandleTask):
                 task.send_message(TaskUpdatingMessage(zip_path, i + 1, total))
 
     # Replace the original ZIP file only if changes were made
-    if changes_made:
-        os.replace(temp_zip_path, zip_path)
-    else:
+    try:
+        if changes_made:
+            send2trash(zip_path)
+            os.replace(temp_zip_path, zip_path)
+        else:
+            os.remove(temp_zip_path)
+    except Exception as e:
+        task.send_message(TaskErrorMessage(zip_path, f"Replace File Error: {e}"))
         os.remove(temp_zip_path)

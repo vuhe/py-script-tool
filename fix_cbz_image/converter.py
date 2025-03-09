@@ -4,6 +4,51 @@ import subprocess
 from PIL import Image
 
 
+class LibJxlError(Exception):
+    def __init__(self, message: str):
+        super().__init__(message)
+        self.message = message
+
+    def __str__(self):
+        return self.message
+
+
+def convert_img_data(data: bytes, filename: str, dry: bool = False):
+    try:
+        # lossless JXL to WebP
+        if filename.endswith(".jxl"):
+            if dry:
+                return None
+            if check_lossless_jxl(data):
+                return convert_jxl_to_webp(data), "webp"
+            return None
+
+        img = Image.open(io.BytesIO(data))
+        img.verify()  # Verify image integrity
+
+        # Correct suffix if necessary
+        if not filename.endswith(f".{img.format.lower()}"):
+            return data, img.format.lower()
+
+        # Convert PNG to WebP
+        if img.format == "PNG":
+            if dry:
+                return b'', "webp"
+            return convert_png_to_webp(data), "webp"
+
+        # Convert JPEG to JXL
+        elif img.format == "JPEG":
+            if dry:
+                return b'', "jxl"
+            return convert_jpeg_to_jxl(data), "jxl"
+
+        # unsupported data
+        return None
+
+    except (IOError, OSError):
+        return None  # Not an image, write as is
+
+
 def check_lossless_jxl(jxl_data):
     try:
         process = subprocess.run(
@@ -21,8 +66,7 @@ def check_lossless_jxl(jxl_data):
         else:
             return False  # 默认判断为有损 JPEG
     except subprocess.CalledProcessError as e:
-        print(f"Error check lossless JXL: {e.stderr.decode()}")
-        return False
+        raise LibJxlError(f"Error check lossless JXL: {e.stderr.decode()}")
 
 
 def convert_jxl_to_webp(jxl_data):
@@ -45,8 +89,7 @@ def convert_jxl_to_webp(jxl_data):
             img.save(webp_io, format="WEBP", quality=90)
             return webp_io.getvalue()
     except subprocess.CalledProcessError as e:
-        print(f"Error converting JPEG to WebP: {e.stderr.decode()}")
-        return None
+        raise LibJxlError(f"Error converting JPEG to WebP: {e.stderr.decode()}")
 
 
 def convert_jpeg_to_jxl(jpeg_data):
@@ -64,8 +107,7 @@ def convert_jpeg_to_jxl(jpeg_data):
         )
         return process.stdout
     except subprocess.CalledProcessError as e:
-        print(f"Error converting JPEG to JXL: {e.stderr.decode()}")
-        return None
+        raise LibJxlError(f"Error converting JPEG to JXL: {e.stderr.decode()}")
 
 
 def convert_png_to_webp(png_data):
@@ -73,12 +115,8 @@ def convert_png_to_webp(png_data):
     Convert PNG data to WebP using PIL.
     Returns the WebP binary data.
     """
-    try:
-        with Image.open(io.BytesIO(png_data)) as img:
-            # Save the image in WebP format with quality set to 90
-            webp_io = io.BytesIO()
-            img.save(webp_io, format="WEBP", quality=90)
-            return webp_io.getvalue()
-    except subprocess.CalledProcessError as e:
-        print(f"Error converting PNG to WebP: {e.stderr.decode()}")
-        return None
+    with Image.open(io.BytesIO(png_data)) as img:
+        # Save the image in WebP format with quality set to 90
+        webp_io = io.BytesIO()
+        img.save(webp_io, format="WEBP", quality=90)
+        return webp_io.getvalue()

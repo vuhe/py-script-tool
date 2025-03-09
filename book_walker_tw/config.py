@@ -20,7 +20,6 @@ class Config:
         webdriver_path = ChromeDriverManager(chrome_type=self.chrome_type).install()
         subprocess.run(["codesign", "--remove-signature", webdriver_path], check=True)
         subprocess.run(["codesign", "--force", "--deep", "-s", "-", webdriver_path], check=True)
-        print(webdriver_path)
 
     def get_webdriver(self, headless: bool | None = None):
         data_dir = os.path.join(os.getcwd(), self.user_data_dir)

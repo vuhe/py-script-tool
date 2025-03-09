@@ -106,4 +106,3 @@ def process_zip_file(zip_path):
         os.replace(temp_zip_path, zip_path)
     else:
         os.remove(temp_zip_path)
-        print(f"No changes made to: {zip_path}")

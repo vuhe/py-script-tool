@@ -67,7 +67,7 @@ def crop_images(input_folder, output_folder, mode):
         return
 
     min_left, min_right, min_top, min_bottom = get_min_white_border(image_files, mode)
-    print(f"L {min_left}, R {min_right}, T {min_top}, B {min_bottom}")
+    print(f"Left({min_left}), Right({min_right}), Top({min_top}), Bottom({min_bottom})")
     min_left_right, min_top_bottom = 0, 0
 
     if mode == "horizontal":

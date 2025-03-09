@@ -64,8 +64,9 @@ def main():
             for file in track(files, description="[blue]Check Img", transient=True, console=console):
                 if file.lower().endswith(('.png', '.jpg', '.jpeg')):
                     check_image_for_error(os.getcwd(), os.path.join(root, file))
+        console.print("[green]Check completed")
     except KeyboardInterrupt:
-        print("Exiting……")
+        console.print("Exiting……")
 
 
 if __name__ == "__main__":

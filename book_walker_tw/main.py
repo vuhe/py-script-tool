@@ -13,8 +13,12 @@ def main():
     config = Config()
 
     parser = argparse.ArgumentParser(description='book walker downloader')
-    parser.add_argument('--login', action="store_true")
+    parser.add_argument('--login', action="store_true", help="登录模式，在浏览器页面中进行登录")
+    parser.add_argument('--skip-codesign', action="store_true", help="跳过对 webdriver 的 codesign 修复")
     args = parser.parse_args()
+
+    if not args.skip_codesign:
+        config.fix_webdriver_codesign()
 
     if args.login:
         login(config)

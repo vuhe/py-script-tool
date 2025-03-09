@@ -2,6 +2,7 @@ import os
 import subprocess
 
 import undetected_chromedriver as uc
+from InquirerPy import inquirer
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
 
@@ -44,4 +45,6 @@ class Config:
         output_dir = os.path.join(os.getcwd(), self.user_output_dir)
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
+        elif not inquirer.confirm(message="存在 output，是否继续?", default=False).execute():
+            exit(0)
         return output_dir
